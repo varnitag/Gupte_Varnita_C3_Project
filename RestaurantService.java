@@ -37,4 +37,31 @@ public class RestaurantService {
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
+
+    /**
+     * Added method for part 3 solution
+     * @return order_cost
+     */
+    public double calculateOrderCost(Restaurant restaurant,ArrayList<String> list) {
+
+        double orderCost = 0;
+        if(restaurant == null){
+            throw new NullPointerException();
+        }
+        ArrayList<Item>menuItem = (ArrayList<Item>) restaurant.getMenu();
+
+
+        if(list == null){
+            throw new NullPointerException();
+        }
+        for (String itemName:list) {
+            for (Item mList:menuItem){
+                if(itemName.equals(mList.getName())){
+                    orderCost = orderCost + mList.getPrice();
+                }
+            }
+        }
+
+        return orderCost;
+    }
 }
