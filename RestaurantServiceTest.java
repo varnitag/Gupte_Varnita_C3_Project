@@ -1,12 +1,12 @@
 import org.junit.jupiter.api.*;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-
 import java.time.LocalTime;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class RestaurantServiceTest {
@@ -98,4 +98,51 @@ class RestaurantServiceTest {
         assertEquals(initialNumberOfRestaurants + 1,service.getRestaurants().size());
     }
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+    //<<<<<<<<<<<<<<<<<< ORDER: CALCULATE ORDER COST starts >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void calculate_order_cost_should_pass_as_ordered_items_will_be_from_selected_list(){
+        ArrayList<String> list =new ArrayList();
+        list.add("Sweet corn soup");
+        list.add("Vegetable lasagne");
+        double cost = service.calculateOrderCost(restaurant,list);
+        //System.out.println(cost);
+        assertNotNull(cost);
+    }
+
+    @Test
+    public void calculate_order_cost_should_fail_as_empty_list_is_passed(){
+        ArrayList<String>list =new ArrayList();
+        double cost = service.calculateOrderCost(restaurant,list);
+        //System.out.println(cost);
+        assertEquals(0,cost);
+    }
+
+    @Test
+    public void calculate_order_cost_should_throw_NullPointerExcetion_as_null_list_is_passed(){
+
+        ArrayList<String>list =null;
+        assertThrows(NullPointerException.class, () -> {
+
+            service.calculateOrderCost(restaurant,list);
+        });
+
+    }
+
+    @Test
+    public void calculate_order_cost_should_throw_NullPointerExcetion_as_null_restaurant_is_passed(){
+
+        ArrayList<String>list =null;
+        assertThrows(NullPointerException.class, () -> {
+
+            service.calculateOrderCost(null,list);
+        });
+
+    }
+
+    //<<<<<<<<<<<<<<<<<< ORDER: CALCULATE ORDER COST ends >>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 }
