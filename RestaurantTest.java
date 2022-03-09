@@ -65,9 +65,6 @@ class RestaurantTest {
     @Test
     public void adding_item_to_menu_should_increase_menu_size_by_1(){
 
-        //restaurant.addToMenu("Sweet corn soup",119);
-        //restaurant.addToMenu("Vegetable lasagne", 269);
-
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.addToMenu("Sizzling brownie",319);
         assertEquals(initialMenuSize+1,restaurant.getMenu().size());
@@ -75,18 +72,12 @@ class RestaurantTest {
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
 
-        //restaurant.addToMenu("Sweet corn soup",119);
-        //restaurant.addToMenu("Vegetable lasagne", 269);
-
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.removeFromMenu("Vegetable lasagne");
         assertEquals(initialMenuSize-1,restaurant.getMenu().size());
     }
     @Test
     public void removing_item_that_does_not_exist_should_throw_exception() {
-
-       // restaurant.addToMenu("Sweet corn soup",119);
-       // restaurant.addToMenu("Vegetable lasagne", 269);
 
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
